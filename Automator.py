@@ -568,7 +568,7 @@ class Automator:
             self.d.click(484, 90)
             time.sleep(1)
         
-        while True:
+        for i in range(5):
             self.d.click(768, 84)
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_, 'img/normal.jpg'):

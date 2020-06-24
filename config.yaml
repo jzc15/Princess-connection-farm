@@ -1,8 +1,8 @@
 work: 
   0: []
   1: [shuatu, hanghui]
-  2: [shouqurenwu, gonghuizhijia, mianfeiniudan, shouqu, dianzan, shouqu, shuatu, hanghui, shouqurenwu]
-  3: [shouqurenwu, gonghuizhijia, mianfeiniudan, shouqu, dianzan, shouqu, huodong, hanghui, shouqurenwu]
+  2: [shouqurenwu, gonghuizhijia, dianzan, shouqu, shuatu, hanghui, tansuo, shouqurenwu]
+  3: [shouqurenwu, gonghuizhijia, dianzan, shouqu, huodong, shouqurenwu]
 
 shuatu:
   default: {}
@@ -12,7 +12,7 @@ shuatu:
       times: 5
       saodang: true
     - guan: 6
-      times: 20
+      times: 5
       saodang: true
     - guan: 7
       times: 5
