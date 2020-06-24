@@ -1,0 +1,40 @@
+work: 
+  0: []
+  1: [shuatu, hanghui]
+  2: [shouqurenwu, gonghuizhijia, mianfeiniudan, shouqu, dianzan, shouqu, shuatu, hanghui, shouqurenwu]
+  3: [shouqurenwu, gonghuizhijia, mianfeiniudan, shouqu, dianzan, shouqu, huodong, hanghui, shouqurenwu]
+
+shuatu:
+  default: {}
+  s11:
+    cur:
+    - guan: 5
+      times: 5
+      saodang: true
+    - guan: 6
+      times: 20
+      saodang: true
+    - guan: 7
+      times: 5
+      saodang: true
+    - guan: 8
+      times: 5
+      saodang: true
+
+huodong:
+  # tuitu: [11, 15]
+  shua:
+  - guan: 15
+    times: 20
+    saodang: true
+  - guan: 15
+    times: 30
+    saodang: false
+     
+
+basic:
+  tuitu:
+    huodong: [168, 339]
+    cur: [146,332]
+    # 11: [146,332]
+    # 10: [146,197]
