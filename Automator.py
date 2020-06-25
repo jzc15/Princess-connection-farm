@@ -18,9 +18,7 @@ class Automator:
         self.appRunning = False
         with codecs.open("config.yaml", "r", "utf-8") as confin:
             self.config = yaml.load(confin)
-        self.cur_point = self.config['basic']['tuitu']['cur']
         self.shuatucl = "default"
-        self.huodong_point = self.config['basic']['tuitu']['huodong']
         
     def start(self):
         """
@@ -525,6 +523,32 @@ class Automator:
             time.sleep(1)  # 保证回到首页
 
     
+    def shuatu_config(self, config):
+        x = 0
+        y = 0
+        print(config)
+        if(isinstance(config['point'], list)):
+            x, y = config['point']
+        else:
+            x, y = self.config['basic']['tuitu'][config['point']]
+    
+
+        if 'tuitu' in config:
+            l, r = config['tuitu']
+            for i in range(l-1, r):
+                self.to_left()
+                self.shuatuzuobiao(x, y, 1, i, True)
+        
+        if 'shua' in config:
+            for c in config['shua']:
+                if (c['saodang'] == True):
+                    self.to_left()    
+                    self.shuatuzuobiao(x, y, c['times'], c['guan']-1, False)
+                else:
+                    for i in range(c['times']):
+                        self.to_left()    
+                        self.shuatuzuobiao(x, y, 1, c['guan']-1, True)
+
     def shuatu(self):#刷图函数 注意此函数要在首页运行
         #进入冒险
         self.d.click(480, 505)
@@ -541,17 +565,8 @@ class Automator:
                 break
         
         config = self.config['shuatu'][self.shuatucl]
-        for cur in config:
-            if(cur == 'cur'):
-                for c in config['cur']:
-                    self.to_left()    
-                    x, y = self.cur_point
-                    if (c['saodang'] == True):
-                        self.shuatuzuobiao(x, y, c['times'], c['guan']-1, False)
-                    else:
-                        for i in range(c['times']):
-                            self.shuatuzuobiao(x, y, 1, c['guan']-1, True)
-
+        self.shuatu_config(config)
+            
         while True:
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_,'img/liwu.jpg'):
@@ -575,22 +590,8 @@ class Automator:
                 break
         
         config = self.config['huodong']
-        x, y = self.huodong_point
         # 推图
-        if 'tuitu' in config:
-            l, r = config['tuitu']
-            for i in range(l-1, r):
-                self.to_left()
-                self.shuatuzuobiao(x, y, 1, i, True)
-        
-        if 'shua' in config:
-            for c in config['shua']:
-                self.to_left()    
-                if (c['saodang'] == True):
-                    self.shuatuzuobiao(x, y, c['times'], c['guan']-1, False)
-                else:
-                    for i in range(c['times']):
-                        self.shuatuzuobiao(x, y, 1, c['guan']-1, True)
+        self.tuitu_config(config)
         
         while True:
             screen_shot_ = self.d.screenshot(format="opencv")
