@@ -1,0 +1,42 @@
+work: 
+  0: []
+  1: [shuatu]
+  2: [shouqurenwu, gonghuizhijia, dianzan, shouqu, shuatu, hanghui, tansuo, shouqurenwu]
+  3: [shouqurenwu, gonghuizhijia, dianzan, shouqu, huodong, shouqurenwu]
+
+shuatu:
+  default: {}
+  s11:
+    point: 11
+    shua:
+    - guan: 5
+      times: 5
+      saodang: true
+    - guan: 6
+      times: 20
+      saodang: true
+    - guan: 7
+      times: 5
+      saodang: true
+    - guan: 8
+      times: 5
+      saodang: true
+  tui4:
+    point: 4   # 对应basic/tuitu 里的坐标
+    tuitu: [7, 12]
+huodong:
+  point: huodong
+  # tuitu: [11, 15]
+  shua:
+  - guan: 15
+    times: 30
+    saodang: false
+     
+
+basic:
+  tuitu:
+    huodong: [168, 339]
+    cur: [146,332]
+    11: [146,332]
+    10: [146,197]
+    4: [184,235]    # 4-1的坐标
