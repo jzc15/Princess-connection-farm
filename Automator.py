@@ -99,7 +99,7 @@ class Automator:
     def guochang(self,screen_shot,template_paths,suiji = 1):
         # suji标号置1, 表示未找到时将点击左上角, 置0则不点击
         #输入截图, 模板list, 得到下一次操作
-
+        time.sleep(5)
         self.dWidth, self.dHeight = self.d.window_size()
         screen_shot = screen_shot
         template_paths = template_paths

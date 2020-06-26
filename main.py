@@ -7,6 +7,7 @@ from Automator import *
 from math import ceil
 import matplotlib.pylab as plt
 import os
+import time
 import threading
 
 
@@ -101,8 +102,17 @@ if __name__ == '__main__':
     #完整循环 join()方法确保完成后再进行下一次循环
     for i in range(accountnum):#完整循环 join()方法确保完成后再进行下一次循环
         # for j in range(emulatornum-1):
-        # t = threading.Thread(target=runmain, args=(lines[0],account_list[i],account_dic[account_list[i]]))
-        runmain(lines[0],account_list[i],account_dic[account_list[i]],work_no[i],shuatucl[i])
+        t = threading.Thread(target=runmain, args=(lines[0],account_list[i],account_dic[account_list[i]],work_no[i],shuatucl[i]))
+        # runmain(lines[0],account_list[i],account_dic[account_list[i]],work_no[i],shuatucl[i])
         # count+=1
+        t.setDaemon(True)
+        t.start()
+        time.sleep(600)
+        if(t.is_alive()):
+            print('>>>>>>>出问题的账号为：',account_list[i],'密码：',account_dic[account_list[i]],'<<<<<<<')
+            os.system('adb kill-server')
+            exit(0)
+        
+
 
     os.system('adb kill-server')
