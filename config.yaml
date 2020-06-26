@@ -1,9 +1,10 @@
 work: 
   0: []
-  1: [shuatu]
+  1: [huodong]
   2: [shouqurenwu, gonghuizhijia, dianzan, shouqu, shuatu, hanghui, tansuo, shouqurenwu]
   3: [shouqurenwu, gonghuizhijia, dianzan, shouqu, huodong, shouqurenwu]
-
+  4: [shuajingyan]
+  5: [shouqurenwu, gonghuizhijia, dianzan, shouqu, shuajingyan]
 shuatu:
   default: {}
   s11:
@@ -29,14 +30,15 @@ huodong:
   # tuitu: [11, 15]
   shua:
   - guan: 15
-    times: 30
+    times: 13
     saodang: false
      
 
 basic:
   tuitu:
     huodong: [168, 339]
-    cur: [146,332]
-    11: [146,332]
-    10: [146,197]
+    cur: [146, 332]
+    11: [146, 332]
+    10: [146, 197]
+    8: [193, 255]
     4: [184,235]    # 4-1的坐标

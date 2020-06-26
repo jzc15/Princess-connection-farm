@@ -73,9 +73,10 @@ def read():#读取账号
     account_dic = {}
     wno = []
     cl = []
-    with open('zhanghao.csv','r') as f:#注意！请把账号密码写在zhanghao.csv
-        for i,line in enumerate(f):
-            account,password,work_no,shuatucl = line.split(',')[0:4]
+    with open('zhanghao.yaml','r') as f:#注意！请把账号密码写在zhanghao.csv
+        lines = yaml.load(f)
+        for i,line in enumerate(lines):
+            account,password,work_no,shuatucl = line[0:4]
             account_dic[account]=password.strip()
             wno.append(work_no)
             cl.append(shuatucl)

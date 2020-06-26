@@ -19,6 +19,7 @@ class Automator:
         with codecs.open("config.yaml", "r", "utf-8") as confin:
             self.config = yaml.load(confin)
         self.shuatucl = "default"
+        self.switch = 0
         
     def start(self):
         """
@@ -443,58 +444,85 @@ class Automator:
 
             while True:
                 self.d.click(811,491)
-                time.sleep(1)
+                time.sleep(5)
                 screen_shot_ = self.d.screenshot(format="opencv")
                 if self.is_there_img(screen_shot_,'img/normal.jpg'):
                     break
 
         else:
-            time.sleep(0.5)
-            while True:#锁定加号
+            tmp_cout = 0
+            while True:  # 锁定加号
                 screen_shot_ = self.d.screenshot(format="opencv")
-                if self.is_there_img(screen_shot_,'img/jiahao.jpg'):
+                if self.is_there_img(screen_shot_, 'img/jiahao.jpg'):
+                    # screen_shot = a.d.screenshot(format="opencv")
+                    for i in range(times - 1):  # 基础1次
+                        # a.guochang(screen_shot,['img/jiahao.jpg'])
+                        # 扫荡券不必使用opencv来识别，降低效率
+                        self.d.click(876, 334)
+                        # time.sleep(0.2)
+                    time.sleep(0.3)
+                    self.d.click(758, 330)  # 使用扫荡券的位置 也可以用OpenCV但是效率不够而且不能自由设定次数
+                    time.sleep(0.3)
+                    screen_shot = self.d.screenshot(format="opencv")
+                    if self.is_there_img(screen_shot, 'img/ok.jpg'):
+                        self.guochang(screen_shot, ['img/ok.jpg'], suiji=0)
+                    else:
+                        time.sleep(0.5)
+                        self.d.click(588, 370)
+                    # screen_shot = a.d.screenshot(format="opencv")
+                    # a.guochang(screen_shot,['img/shiyongsanzhang.jpg'])
+                    screen_shot_ = self.d.screenshot(format="opencv")
+                    if self.is_there_img(screen_shot_, 'img/tilibuzu.jpg'):
+                        print('>>>无扫荡券或者无体力！结束此次刷图任务！<<<\r\n')
+                        self.switch = 1
+                        self.d.click(677, 458)  # 取消
+                        break
+                    if self.is_there_img(screen_shot, 'img/tiaoguo.jpg'):
+                        self.guochang(screen_shot, ['img/tiaoguo.jpg'], suiji=0)
+                        self.guochang(screen_shot, ['img/ok.jpg'], suiji=0)
+                    else:
+                        time.sleep(1)
+                        self.d.click(475, 481)  # 手动点击跳过
+                        self.guochang(screen_shot, ['img/ok.jpg'], suiji=0)
                     break
-                self.d.click(x,y)
-                time.sleep(0.5)
-            screen_shot = self.d.screenshot(format="opencv")
-            for i in range(times-1):#基础1次
-                self.guochang(screen_shot,['img/jiahao.jpg'])
-                time.sleep(0.2)
+                else:
+                    if tmp_cout < 5:
+                        # 计时5次就失败
+                        self.d.click(x, y)
+                        time.sleep(0.5)
+                        tmp_cout = tmp_cout + 1
+                    else:
+                        print('>>>无扫荡券或者无体力！结束此次刷图任务！<<<\r\n')
+                        self.switch = 1
+                        self.d.click(677, 458)  # 取消
+                        break
+        while True:
+            self.d.click(1,1)
             time.sleep(0.3)
-            self.d.click(758,330)#使用扫荡券的位置 也可以用OpenCV但是效率不够而且不能自由设定次数
-            time.sleep(0.3)
-            # screen_shot = self.d.screenshot(format="opencv")
-            # self.guochang(screen_shot,['img/shiyongsanzhang.jpg'])
-            screen_shot = self.d.screenshot(format="opencv") 
-            self.guochang(screen_shot,['img/ok.jpg'])
-            while True:
-                self.d.click(1,1)
-                time.sleep(0.3)
-                screen_shot_ = self.d.screenshot(format="opencv")
-                if self.is_there_img(screen_shot_,'img/normal.jpg'):
-                    break
-
+            screen_shot_ = self.d.screenshot(format="opencv")
+            if self.is_there_img(screen_shot_,'img/normal.jpg'):
+                break
 
     def shuajingyan(self):
         """
         刷图刷1-1
         """
         # 体力单独设置
-        for i in range(7):
-            while True:
-                screen_shot_ = self.d.screenshot(format="opencv")
-                if self.is_there_img(screen_shot_, 'img/liwu.jpg'):
-                    break
-                self.d.click(100, 505)
-                time.sleep(1)  # 首页锁定，保证回到首页
-            self.d.click(320, 31)
-            time.sleep(0.5)
-            screen_shot = self.d.screenshot(format="opencv")
-            self.guochang(screen_shot, ['img/ok.jpg'], suiji=0)
-            time.sleep(0.5)
-            screen_shot = self.d.screenshot(format="opencv")
-            self.guochang(screen_shot, ['img/zhandou_ok.jpg'], suiji=1)
-            self.d.click(100, 505)  # 点击一下首页比较保险
+        # for i in range(7):
+        #     while True:
+        #         screen_shot_ = self.d.screenshot(format="opencv")
+        #         if self.is_there_img(screen_shot_, 'img/liwu.jpg'):
+        #             break
+        #         self.d.click(100, 505)
+        #         time.sleep(1)  # 首页锁定，保证回到首页
+        #     self.d.click(320, 31)
+        #     time.sleep(0.5)
+        #     screen_shot = self.d.screenshot(format="opencv")
+        #     self.guochang(screen_shot, ['img/ok.jpg'], suiji=0)
+        #     time.sleep(0.5)
+        #     screen_shot = self.d.screenshot(format="opencv")
+        #     self.guochang(screen_shot, ['img/zhandou_ok.jpg'], suiji=1)
+        #     self.d.click(100, 505)  # 点击一下首页比较保险
         # 进入冒险
         time.sleep(2)
         self.d.click(480, 505)
@@ -513,8 +541,11 @@ class Automator:
         for i in range(10):
             self.d.click(27, 272)
             time.sleep(3)
-        self.shuatuzuobiao(106, 279, 160)  # 1-1 刷7次体力为佳
-
+        
+        # for i in range(50):
+        #     self.to_left()
+        #     self.shuatuzuobiao(106, 279, 1, tiaozhan=True)  # 1-1 刷7次体力为佳
+        self.shuatuzuobiao(106, 279, 160, tiaozhan=False)  # 1-1 刷7次体力为佳
         while True:
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_, 'img/liwu.jpg'):
@@ -547,6 +578,7 @@ class Automator:
                 else:
                     for i in range(c['times']):
                         self.to_left()    
+                        self.to_left() 
                         self.shuatuzuobiao(x, y, 1, c['guan']-1, True)
 
     def shuatu(self):#刷图函数 注意此函数要在首页运行
@@ -591,7 +623,7 @@ class Automator:
         
         config = self.config['huodong']
         # 推图
-        self.tuitu_config(config)
+        self.shuatu_config(config)
         
         while True:
             screen_shot_ = self.d.screenshot(format="opencv")
