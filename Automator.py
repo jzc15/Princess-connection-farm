@@ -554,7 +554,7 @@ class Automator:
             if self.is_there_img(screen_shot_,'img/hard.jpg'):
                 break
 
-    def shuajingyan(self, saodang=True):
+    def shuajingyan(self, times = 20):
         """
         刷图刷1-1
         """
@@ -593,12 +593,13 @@ class Automator:
             self.d.click(27, 272)
             time.sleep(3)
         
-        if saodang:
-            self.shuatuzuobiao(106, 279, 160, tiaozhan=False)  # 1-1 刷7次体力为佳
-        else:
-            for i in range(160):
-                self.to_left()
-                self.shuatuzuobiao(106, 279, 1, tiaozhan=True)  # 1-1 刷7次体力为佳
+    
+        for i in range(times):
+            self.to_left()
+            self.shuatuzuobiao(106, 279, 1, tiaozhan=True)  # 1-1 刷7次体力为佳
+
+        self.shuatuzuobiao(106, 279, 160, tiaozhan=False)  # 1-1 刷7次体力为佳
+       
         while True:
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_, 'img/liwu.jpg'):

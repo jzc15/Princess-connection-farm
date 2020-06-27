@@ -3,8 +3,8 @@ work:
   1: [shouqurenwu, shuatu]
   2: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, shuatu, hanghui, tansuo, shouqurenwu, "shuatu(True, 'hard')"]
   3: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, huodong, shouqurenwu, "shuatu(True, 'hard')"]
-  4: [shuajingyan(False)]
-  5: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, "shuatu(True, 'hard')", shuajingyan, shouqurenwu]
+  4: [shuajingyan]
+  5: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, "shuatu(True, 'hard')", shuajingyan(20), shouqurenwu]
   6: [mianfei10]
   7: [gonghuizhijia, shouqurenwu, "shuatu(True, 'hard')", shuajingyan, shouqurenwu]
   
