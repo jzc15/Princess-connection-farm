@@ -28,7 +28,11 @@ def runmain(address,account,password,work_no,shuatucl = ""):
     a.init_home()#初始化，确保进入首页
     a.shuatucl = shuatucl
     for x in a.config['work'][work_no]:
-        text = "a.{0}()".format(x)
+        if ('(' in x):
+            text = "a." + x
+        else:
+            text = "a." + x +"()"
+        
         print(text)
         eval(text)
     # a.shouqurenwu()#收取任务
@@ -95,7 +99,7 @@ if __name__ == '__main__':
     lines,emulatornum = connect()
     #读取账号
     account_list,account_dic,accountnum,work_no,shuatucl = read()
-
+    
     # runmain(lines[0],account_list[0],account_dic[account_list[0]])
     # 多线程执行
     count = 0 #完成账号数
@@ -107,7 +111,11 @@ if __name__ == '__main__':
         # count+=1
         t.setDaemon(True)
         t.start()
-        time.sleep(600)
+
+        for j in range(10):
+            time.sleep(60)
+            if(not t.is_alive()):
+                break
         if(t.is_alive()):
             print('>>>>>>>出问题的账号为：',account_list[i],'密码：',account_dic[account_list[i]],'<<<<<<<')
             os.system('adb kill-server')

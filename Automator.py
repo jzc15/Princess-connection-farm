@@ -99,7 +99,7 @@ class Automator:
     def guochang(self,screen_shot,template_paths,suiji = 1):
         # suji标号置1, 表示未找到时将点击左上角, 置0则不点击
         #输入截图, 模板list, 得到下一次操作
-        time.sleep(5)
+        time.sleep(3)
         self.dWidth, self.dHeight = self.d.window_size()
         screen_shot = screen_shot
         template_paths = template_paths
@@ -173,6 +173,51 @@ class Automator:
             self.guochang(screen_shot_, ['img/jyquanbushouqu.jpg'], suiji=0)
             screen_shot_ = self.d.screenshot(format="opencv")
             self.guochang(screen_shot_, ['img/guanbi.jpg'], suiji=0)
+        while True:
+            screen_shot_ = self.d.screenshot(format="opencv")
+            if self.is_there_img(screen_shot_, 'img/liwu.jpg'):
+                break
+            self.d.click(100, 505)
+            time.sleep(1)  # 首页锁定，保证回到首页
+
+    def mianfei10(self):
+        # 免费扭蛋
+        while True:
+            screen_shot_ = self.d.screenshot(format="opencv")
+            if self.is_there_img(screen_shot_, 'img/liwu.jpg'):
+                break
+            self.d.click(100, 505)
+            time.sleep(1)  # 首页锁定，保证回到首页
+        while True:
+            screen_shot_ = self.d.screenshot(format="opencv")
+            if self.is_there_img(screen_shot_, 'img/liwu.jpg'):
+                self.d.click(750, 510) # 点进扭蛋界面
+                time.sleep(1)
+                break
+
+        while True:
+            # 跳过抽奖提示
+            time.sleep(1)
+            
+            if self.is_there_img(screen_shot_, 'img/niudan_sheding.jpg'):
+                screen_shot_ = self.d.screenshot(format="opencv")
+                self.guochang(screen_shot_, ['img/niudan_sheding.jpg'], suiji=0)
+                break
+            else:
+                time.sleep(1)
+                self.d.click(473, 436)  # 手动点击
+                time.sleep(2)
+                break
+
+        time.sleep(1)
+        screen_shot_ = self.d.screenshot(format="opencv")
+        if self.is_there_img(screen_shot_, 'img/niudan_free10.jpg'):
+            self.guochang(screen_shot_, ['img/niudan_free10.jpg'], suiji=0)
+            time.sleep(1)
+            self.d.click(722, 351)  # 点进扭蛋
+            time.sleep(1)
+            self.d.click(584, 384)
+            
         while True:
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_, 'img/liwu.jpg'):
@@ -410,6 +455,7 @@ class Automator:
                         screen_shot = self.d.screenshot(format="opencv")
                         if self.is_there_img(screen_shot,'img/zhiyuansheding.jpg'):
                             break
+            self.guochang(screen_shot, ['img/ok.jpg'], suiji=0)
             self.d.click(1, 1)#处理被点赞的情况
             time.sleep(5)
 
@@ -447,6 +493,8 @@ class Automator:
                 time.sleep(5)
                 screen_shot_ = self.d.screenshot(format="opencv")
                 if self.is_there_img(screen_shot_,'img/normal.jpg'):
+                    break
+                if self.is_there_img(screen_shot_,'img/hard.jpg'):
                     break
 
         else:
@@ -502,8 +550,10 @@ class Automator:
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_,'img/normal.jpg'):
                 break
+            if self.is_there_img(screen_shot_,'img/hard.jpg'):
+                break
 
-    def shuajingyan(self):
+    def shuajingyan(self, saodang=True):
         """
         刷图刷1-1
         """
@@ -542,10 +592,12 @@ class Automator:
             self.d.click(27, 272)
             time.sleep(3)
         
-        # for i in range(50):
-        #     self.to_left()
-        #     self.shuatuzuobiao(106, 279, 1, tiaozhan=True)  # 1-1 刷7次体力为佳
-        self.shuatuzuobiao(106, 279, 160, tiaozhan=False)  # 1-1 刷7次体力为佳
+        if saodang:
+            self.shuatuzuobiao(106, 279, 160, tiaozhan=False)  # 1-1 刷7次体力为佳
+        else:
+            for i in range(160):
+                self.to_left()
+                self.shuatuzuobiao(106, 279, 1, tiaozhan=True)  # 1-1 刷7次体力为佳
         while True:
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_, 'img/liwu.jpg'):
@@ -581,7 +633,7 @@ class Automator:
                         self.to_left() 
                         self.shuatuzuobiao(x, y, 1, c['guan']-1, True)
 
-    def shuatu(self):#刷图函数 注意此函数要在首页运行
+    def shuatu(self, hard = False, extra_config = None):#刷图函数 注意此函数要在首页运行
         #进入冒险
         self.d.click(480, 505)
         time.sleep(0.5) 
@@ -591,12 +643,23 @@ class Automator:
                 break
         self.d.click(562, 253)
         time.sleep(1)
-        while True:
+        for i in range(5):
+            self.d.click(707, 84)
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_,'img/normal.jpg'):
                 break
         
+        if(hard):
+            for i in range(5):
+                self.d.click(830, 84)
+                time.sleep(3)
+            for i in range(10):
+                self.d.click(27, 272)
+            time.sleep(3)
+
         config = self.config['shuatu'][self.shuatucl]
+        if(extra_config != None):
+            config = self.config['shuatu'][extra_config]
         self.shuatu_config(config)
             
         while True:
@@ -846,11 +909,11 @@ class Automator:
         time.sleep(0.5)
         self.d.click(752, 327)#扫荡
         time.sleep(0.5)
-        while True:
+        for i in range(5):
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_,'img/ok.jpg'):
                 self.d.click(590, 363)#ok
-                time.sleep(0.5)
+                time.sleep(2)
                 break
         while True:
             screen_shot_ = self.d.screenshot(format="opencv")
@@ -873,7 +936,7 @@ class Automator:
         time.sleep(0.5)
         self.d.click(752, 327)#扫荡
         time.sleep(0.5)
-        while True:
+        for i in range(5):
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_,'img/ok.jpg'):
                 self.d.click(590, 363)#ok
