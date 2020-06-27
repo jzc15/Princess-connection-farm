@@ -1,38 +1,61 @@
 work: 
   0: []
-  1: [huodong]
-  2: [shouqurenwu, gonghuizhijia, dianzan, shouqu, shuatu, hanghui, tansuo, shouqurenwu]
-  3: [shouqurenwu, gonghuizhijia, dianzan, shouqu, huodong, shouqurenwu]
-  4: [shuajingyan]
-  5: [shouqurenwu, gonghuizhijia, dianzan, shouqu, goumaitili, shuajingyan]
+  1: [shouqurenwu, shuatu]
+  2: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, shuatu, hanghui, tansuo, shouqurenwu, "shuatu(True, 'hard')"]
+  3: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, huodong, shouqurenwu, "shuatu(True, 'hard')"]
+  4: [shuajingyan(False)]
+  5: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, shuajingyan, shouqurenwu, "shuatu(True, 'hard')"]
+  6: [mianfei10]
+  7: ["shuatu(True, 'hard')"]
 shuatu:
   default: {}
   s11:
     point: 11
     shua:
-    - guan: 5
-      times: 5
+    - guan: 4
+      times: 20
       saodang: true
-    - guan: 6
-      times: 5
-      saodang: true
-    - guan: 7
-      times: 5
-      saodang: true
-    - guan: 8
-      times: 5
-      saodang: true
+    # - guan: 6
+    #   times: 5
+    #   saodang: true
+    # - guan: 7
+    #   times: 5
+    #   saodang: true
+    # - guan: 8
+    #   times: 5
+    #   saodang: true
   tui4:
     point: 4   # 对应basic/tuitu 里的坐标
     tuitu: [7, 12]
+  tui3:
+    point: 3   # 对应basic/tuitu 里的坐标
+    tuitu: [2, 5]
+    # shua:
+    # - guan: 1
+    #   times: 20
+    #   saodang: true
+  hard:
+    point: h1
+    tuitu: [1, 3]
+    shua:
+    - guan: 1
+      times: 2
+      saodang: true
+    # - guan: 5
+    #   times: 2
+    #   saodang: true
+    # - guan: 7
+    #   times: 2
+    #   saodang: true
+    
 huodong:
   point: huodong
   # tuitu: [11, 15]
   shua:
   - guan: 15
-    times: 13
-    saodang: false
-     
+    times: 60
+    saodang: true
+  
 
 basic:
   tuitu:
@@ -41,4 +64,6 @@ basic:
     11: [146, 332]
     10: [146, 197]
     8: [193, 255]
-    4: [184,235]    # 4-1的坐标
+    4: [184, 235]    # 4-1的坐标
+    3: [143, 194]
+    h1: [242, 333]
