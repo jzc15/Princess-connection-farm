@@ -4,9 +4,10 @@ work:
   2: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, shuatu, hanghui, tansuo, shouqurenwu, "shuatu(True, 'hard')"]
   3: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, huodong, shouqurenwu, "shuatu(True, 'hard')"]
   4: [shuajingyan(False)]
-  5: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, shuajingyan, shouqurenwu, "shuatu(True, 'hard')"]
+  5: [shouqurenwu, gonghuizhijia, mianfeiniudan, mianfei10, dianzan, shouqu, "shuatu(True, 'hard')", shuajingyan, shouqurenwu]
   6: [mianfei10]
-  7: ["shuatu(True, 'hard')"]
+  7: [gonghuizhijia, shouqurenwu, "shuatu(True, 'hard')", shuajingyan, shouqurenwu]
+  
 shuatu:
   default: {}
   s11:

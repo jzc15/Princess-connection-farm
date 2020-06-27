@@ -455,6 +455,7 @@ class Automator:
                         screen_shot = self.d.screenshot(format="opencv")
                         if self.is_there_img(screen_shot,'img/zhiyuansheding.jpg'):
                             break
+            screen_shot = self.d.screenshot(format="opencv")
             self.guochang(screen_shot, ['img/ok.jpg'], suiji=0)
             self.d.click(1, 1)#处理被点赞的情况
             time.sleep(5)
