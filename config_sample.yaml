@@ -37,7 +37,7 @@ shuatu:
     #   saodang: true
   hard:
     point: h1
-    tuitu: [1, 3]
+    tuitu: [3, 3]
     shua:
     - guan: 1
       times: 2

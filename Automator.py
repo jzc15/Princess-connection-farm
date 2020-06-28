@@ -217,7 +217,9 @@ class Automator:
             self.d.click(722, 351)  # 点进扭蛋
             time.sleep(1)
             self.d.click(584, 384)
-            
+            for i in range(0, 3):
+                time.sleep(3)
+                self.d.click(896, 30)
         while True:
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_, 'img/liwu.jpg'):
@@ -489,6 +491,7 @@ class Automator:
             time.sleep(2)
             self.d.click(850, 452)
 
+            time.sleep(30)
             while True:
                 self.d.click(811,491)
                 time.sleep(5)
@@ -586,6 +589,7 @@ class Automator:
         self.d.click(562, 253)
         time.sleep(2)
         while True:
+            self.d.click(707, 84)
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_, 'img/normal.jpg'):
                 break
@@ -657,6 +661,7 @@ class Automator:
                 time.sleep(3)
             for i in range(10):
                 self.d.click(27, 272)
+                time.sleep(1)
             time.sleep(3)
 
         config = self.config['shuatu'][self.shuatucl]
