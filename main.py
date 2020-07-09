@@ -112,8 +112,8 @@ if __name__ == '__main__':
         t.setDaemon(True)
         t.start()
 
-        for j in range(30):
-            time.sleep(60)
+        for j in range(60):
+            time.sleep(30)
             if(not t.is_alive()):
                 break
         if(t.is_alive()):

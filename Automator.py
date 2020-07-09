@@ -408,7 +408,7 @@ class Automator:
 
 
     def goumaitili(self):#购买体力，注意此函数参数默认在首页执行，其他地方执行要调整参数
-        for i in range(3):
+        for i in range(1):
             while True:
                 screen_shot_ = self.d.screenshot(format="opencv")
                 if self.is_there_img(screen_shot_,'img/liwu.jpg'):
@@ -435,10 +435,10 @@ class Automator:
         time.sleep(1)
         self.d.click(693, 436)
         time.sleep(1)
-        for i in range(5):#6-17修改：减少opencv使用量提高稳定性
+        for i in range(6):#6-17修改：减少opencv使用量提高稳定性
             screen_shot_ = self.d.screenshot(format="opencv")
             if self.is_there_img(screen_shot_,'img/zhiyuansheding.jpg'):
-                time.sleep(3)#加载行会聊天界面会有延迟
+                time.sleep(5)#加载行会聊天界面会有延迟
                 screen_shot = self.d.screenshot(format="opencv")
                 if self.is_there_img(screen_shot,'img/juanzengqingqiu.jpg'):
                     self.d.click(367, 39)#点击定位捐赠按钮
@@ -640,6 +640,14 @@ class Automator:
                         self.shuatuzuobiao(x, y, 1, c['guan']-1, True)
 
     def shuatu(self, hard = False, extra_config = None):#刷图函数 注意此函数要在首页运行
+        
+        while True:
+            screen_shot_ = self.d.screenshot(format="opencv")
+            if self.is_there_img(screen_shot_,'img/liwu.jpg'):
+                break
+            self.d.click(100,505)
+            time.sleep(1)#保证回到首页
+
         #进入冒险
         self.d.click(480, 505)
         time.sleep(0.5) 
